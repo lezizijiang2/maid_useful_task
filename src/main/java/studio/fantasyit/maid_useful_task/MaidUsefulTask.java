@@ -1,45 +1,27 @@
 package studio.fantasyit.maid_useful_task;
 
-import com.mojang.logging.LogUtils;
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.MapColor;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
-import org.slf4j.Logger;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.common.Mod;
 import studio.fantasyit.maid_useful_task.registry.MemoryModuleRegistry;
 
-// The value here should match an entry in the META-INF/mods.toml file
+/**
+ * 女仆实用任务模组主类
+ * 负责模组初始化和注册各种组件
+ */
 @Mod(MaidUsefulTask.MODID)
 public class MaidUsefulTask {
 
-    // Define mod id in a common place for everything to reference
+    /**
+     * 定义模组ID常量，作为全局引用
+     */
     public static final String MODID = "maid_useful_task";
 
-    @SuppressWarnings("removal")
-    public MaidUsefulTask() {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+    /**
+     * 模组构造函数
+     * 负责注册各种事件总线和模组组件
+     */
+    public MaidUsefulTask(IEventBus modEventBus) {
+        // 注册记忆模块
         MemoryModuleRegistry.register(modEventBus);
     }
 }

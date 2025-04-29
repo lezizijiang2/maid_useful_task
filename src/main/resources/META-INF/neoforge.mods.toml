@@ -1,0 +1,42 @@
+# This is an example neoforge.mods file. It contains the data relating to the loading mods.
+# There are several mandatory fields (#mandatory), and many more that are optional (#optional).
+# The overall format is standard TOML format, v0.5.0.
+# Note that there are a couple of TOML lists in this file.
+# Find more information on toml format here:  https://github.com/toml-lang/toml
+# The name of the mod loader type to load - for regular FML @Mod mods it should be javafml
+modLoader="javafml" #mandatory
+loaderVersion="${loader_version_range}" #mandatory
+license="${mod_license}"
+
+[[mods]] #mandatory
+modId="${mod_id}" #mandatory
+version="${mod_version}" #mandatory
+displayName="${mod_name}" #mandatory
+authors="${mod_authors}" #optional
+description='''${mod_description}'''
+
+[[dependencies."${mod_id}"]] #optional
+    modId="neoforge" #mandatory
+    mandatory=true #mandatory
+    versionRange="${neoforge_version_range}" #mandatory
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies."${mod_id}"]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies."${mod_id}"]]
+    modId="touhou_little_maid"
+    mandatory=true
+    versionRange="[1.2.2,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[mixins]]
+config = "${mod_id}.mixins.json"
+[[accessTransformers]]
+file = "META-INF/accesstransformer.cfg"

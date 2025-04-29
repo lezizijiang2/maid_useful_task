@@ -3,16 +3,9 @@ package studio.fantasyit.maid_useful_task.task;
 import com.github.tartaricacid.touhoulittlemaid.entity.passive.EntityMaid;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.behavior.BehaviorControl;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.BaseFireBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -113,10 +106,7 @@ public interface IMaidBlockDestroyTask {
      */
     default boolean canDestroyBlock(EntityMaid maid, BlockPos pos) {
         //女仆可能少走一格，所以判断时给予补偿
-        if (maid.distanceToSqr(pos.getCenter()) > Math.pow(reachDistance() + 1, 2)) {
-            return false;
-        }
-        return true;
+        return !(maid.distanceToSqr(pos.getCenter()) > Math.pow(reachDistance() + 1, 2));
     }
 
     /**
